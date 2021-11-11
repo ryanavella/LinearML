@@ -29,6 +29,11 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
+
+let program base root no_opt dump_as mdl = ""
+
+
+(*
 open Utils
 open Llvm
 open Llvm_target
@@ -936,3 +941,4 @@ and const env ty = function
     g
   | Echar c -> const_int_of_string ty c 10
 
+ *)

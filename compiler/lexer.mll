@@ -102,21 +102,21 @@ let make_char s =
 
 let rec escape res s i j = 
   if i >= String.length s
-  then res
+  then ()
   else if s.[i] = '\\'
   then if i = String.length s - 1
   then illegal_char '\\'
   else begin 
     (match s.[i+1] with
-    | '\\'   -> res.[j] <- '\\'
-    | 't' -> res.[j] <- '\t'
-    | 'r' -> res.[j] <- '\r'
-    | 'n' -> res.[j] <- '\n'
-    | 'b' -> res.[j] <- '\b' 
+    | '\\'   -> Bytes.set res j '\\'
+    | 't' ->    Bytes.set res j '\t'
+    | 'r' ->    Bytes.set res j '\r'
+    | 'n' ->    Bytes.set res j '\n'
+    | 'b' ->    Bytes.set res j '\b' 
     | c   -> illegal_char c) ;
     escape res s (i+2) (j+1)
   end
-  else (res.[j] <- s.[i] ; escape res s (i+1) (j+1))
+  else (Bytes.set res j s.[i]; escape res s (i+1) (j+1))
 
 let escape_string s = 
   let n = ref 0 in
@@ -124,8 +124,9 @@ let escape_string s =
     if s.[i] = '\\' 
     then incr n
   done ;
-  let res = String.create (String.length s - !n) in
-  escape res s 0 0
+  let res = Bytes.create (String.length s - !n) in
+  escape res s 0 0;
+  Bytes.to_string res
 
 }
 

@@ -1,0 +1,12 @@
+(env
+ (dev
+  (flags (:standard -warn-error -A))))
+
+(ocamlyacc parser)
+(ocamllex lexer)
+
+(executable
+ (name main)
+ (public_name linearml)
+ (package linearml)
+ (libraries unix))

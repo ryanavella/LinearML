@@ -53,9 +53,8 @@ module Print = struct
   | Bool true -> o "true"
   | Bool false -> o "false"
   | Char c ->
-      let s = "'.'" in
-      s.[1] <- c;
-      o s
+     let s = "." ^ String.make 1 c in
+     o s
   | Int n -> o (string_of_int n)
   | Float f -> o (string_of_float f)
   | String s -> o ("\""^String.escaped s^"\"")
